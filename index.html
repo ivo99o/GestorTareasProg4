@@ -4,57 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestor de Tareas</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header class="app-header">
-    <h1>Gestor de Tareas</h1>
-  </header>
-
   <div class="app-layout">
 
-    <!-- Barra lateral: formulario para crear tareas -->
+    <input type="checkbox" id="toggle-form" class="toggle-form-checkbox">
+
+    <label for="toggle-form" class="fab-agregar" aria-label="Agregar tarea">+</label>
+
     <aside class="sidebar">
-      <h2>Lista de Tareas</h2>
+      <div class="sidebar-titulo">
+        <h2>Agregar Tarea</h2>
+        <label for="toggle-form" class="btn-cerrar-form" aria-label="Cerrar formulario">&times;</label>
+      </div>
 
       <form class="form-tarea" action="#" method="post">
-        <div class="campo">
-          <label for="titulo">Título</label>
-          <input type="text" id="titulo" name="titulo" placeholder="Título de la tarea" required>
-        </div>
+        <div class="campos">
+          <div class="campo">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Título de la tarea" required>
+          </div>
 
-        <div class="campo">
-          <label for="categoria">Categoría</label>
-          <select id="categoria" name="categoria" required>
-            <option value="">Seleccionar categoría</option>
-            <option value="laboral">Laboral</option>
-            <option value="estudio">Estudio</option>
-            <option value="recordatorio">Recordatorio</option>
-            <option value="pendiente">Pendiente</option>
-          </select>
-        </div>
+          <div class="campo">
+            <label for="categoria">Categoría</label>
+            <select id="categoria" name="categoria" required>
+              <option value="">Seleccionar categoría</option>
+              <option value="laboral">Laboral</option>
+              <option value="estudio">Estudio</option>
+              <option value="recordatorio">Recordatorio</option>
+              <option value="pendiente">Pendiente</option>
+            </select>
+          </div>
 
-        <div class="campo">
-          <label for="telefono">Teléfono</label>
-          <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3815551234" required>
-        </div>
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3815551234" required>
+          </div>
 
-        <div class="campo">
-          <label for="fecha">Fecha objetivo</label>
-          <input type="date" id="fecha" name="fecha" required>
-        </div>
+          <div class="campo">
+            <label for="fecha">Fecha objetivo</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
 
-        <div class="campo">
-          <label for="hora">Hora</label>
-          <input type="time" id="hora" name="hora">
+          <div class="campo">
+            <label for="hora">Hora</label>
+            <input type="time" id="hora" name="hora">
+          </div>
         </div>
 
         <button type="submit" class="btn-crear">Crear tarea</button>
       </form>
     </aside>
 
-    <!-- Contenido principal: listado y filtros -->
     <main class="contenido">
       <h2>Tareas</h2>
 
@@ -69,9 +72,12 @@
       <section class="lista-tareas" aria-label="Listado de tareas">
 
         <article class="tarea tarea--vencida" data-categoria="recordatorio">
-          <h3 class="tarea-titulo">tarea vencida <span class="tarea-categoria">- recordatorio</span></h3>
-          <p class="tarea-fecha">Fecha objetivo: 11/10/2025, 20:15:00</p>
-          <p class="tarea-estado"> Estado: <strong>VENCIDA</strong></p>
+          <h3 class="tarea-titulo">tarea vencida</h3>
+          <div class="tarea-info">
+            <p class="tarea-categoria">🏷️ Categoría: <strong>Recordatorio</strong></p>
+            <p class="tarea-fecha">📅 Fecha objetivo: 11/10/2025, 20:15:00</p>
+            <p class="tarea-estado">🔴 Estado: <strong>VENCIDA</strong></p>
+          </div>
           <div class="tarea-acciones">
             <button type="button" class="btn-eliminar">Eliminar</button>
             <button type="button" class="btn-editar">Editar</button>
@@ -79,9 +85,12 @@
         </article>
 
         <article class="tarea tarea--naranja" data-categoria="estudio">
-          <h3 class="tarea-titulo">tarea <span class="tarea-categoria">- estudio</span></h3>
-          <p class="tarea-fecha">Fecha objetivo: 11/3/2026, 21:04:00</p>
-          <p class="tarea-estado">Estado: <strong>NARANJA</strong></p>
+          <h3 class="tarea-titulo">tarea</h3>
+          <div class="tarea-info">
+            <p class="tarea-categoria">🏷️ Categoría: <strong>Estudio</strong></p>
+            <p class="tarea-fecha">📅 Fecha objetivo: 11/3/2026, 21:04:00</p>
+            <p class="tarea-estado">🟠 Estado: <strong>NARANJA</strong></p>
+          </div>
           <div class="tarea-acciones">
             <button type="button" class="btn-eliminar">Eliminar</button>
             <button type="button" class="btn-editar">Editar</button>
@@ -89,9 +98,12 @@
         </article>
 
         <article class="tarea tarea--amarilla" data-categoria="estudio">
-          <h3 class="tarea-titulo">tarea amarilla <span class="tarea-categoria">- estudio</span></h3>
-          <p class="tarea-fecha">Fecha objetivo: 12/1/2026, 11:01:00</p>
-          <p class="tarea-estado">Estado: <strong>AMARILLO</strong></p>
+          <h3 class="tarea-titulo">tarea amarilla</h3>
+          <div class="tarea-info">
+            <p class="tarea-categoria">🏷️ Categoría: <strong>Estudio</strong></p>
+            <p class="tarea-fecha">📅 Fecha objetivo: 12/1/2026, 11:01:00</p>
+            <p class="tarea-estado">🟡 Estado: <strong>AMARILLO</strong></p>
+          </div>
           <div class="tarea-acciones">
             <button type="button" class="btn-eliminar">Eliminar</button>
             <button type="button" class="btn-editar">Editar</button>
@@ -99,9 +111,12 @@
         </article>
 
         <article class="tarea tarea--pendiente" data-categoria="laboral">
-          <h3 class="tarea-titulo">tarea pendiente <span class="tarea-categoria">- laboral</span></h3>
-          <p class="tarea-fecha">Fecha objetivo: 4/12/2026, 21:10:00</p>
-          <p class="tarea-estado"> Estado: <strong>PENDIENTE</strong></p>
+          <h3 class="tarea-titulo">tarea pendiente</h3>
+          <div class="tarea-info">
+            <p class="tarea-categoria">🏷️ Categoría: <strong>Laboral</strong></p>
+            <p class="tarea-fecha">📅 Fecha objetivo: 4/12/2026, 21:10:00</p>
+            <p class="tarea-estado">⚪ Estado: <strong>PENDIENTE</strong></p>
+          </div>
           <div class="tarea-acciones">
             <button type="button" class="btn-eliminar">Eliminar</button>
             <button type="button" class="btn-editar">Editar</button>
@@ -112,10 +127,6 @@
     </main>
 
   </div>
-
-  <footer class="app-footer">
-    <p>Gestor de Tareas &mdash; Trabajo Práctico</p>
-  </footer>
 
 </body>
 </html>
