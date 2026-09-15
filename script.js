@@ -112,7 +112,7 @@ function crearTarjetaTarea(tarea) {
 }
 
 function renderizarTareas() {
-  revisarCambiosDeEstado();
+  revisarCambiosDeEstado(true);
   listaTareas.innerHTML = '';
 
   const tareasFiltradas = tareas.filter(function (tarea) {
@@ -258,15 +258,17 @@ function notificar(tarea, estado) {
   });
 }
 
-function revisarCambiosDeEstado() {
+function revisarCambiosDeEstado(notificarCambios) {
   tareas.forEach(function (tarea) {
     const estado = calcularEstado(tarea.fechaObjetivo);
     const estadoAnterior = estadosAnteriores.get(tarea.id);
 
     if (estadoAnterior !== estado.texto) {
-      const esUrgente = estado.texto === 'AMARILLO' || estado.texto === 'NARANJA' || estado.texto === 'VENCIDA';
-      if (esUrgente) {
-        notificar(tarea, estado);
+      if (notificarCambios && estadoAnterior !== undefined) {
+        const esUrgente = estado.texto === 'AMARILLO' || estado.texto === 'NARANJA' || estado.texto === 'VENCIDA';
+        if (esUrgente) {
+          notificar(tarea, estado);
+        }
       }
       estadosAnteriores.set(tarea.id, estado.texto);
     }
