@@ -218,6 +218,12 @@ body {
 
 .tarea-titulo {
   font-size: var(--titulo-tarea);
+  line-height: 1.3;
+  min-height: calc(var(--titulo-tarea) * 1.3 * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .tarea-info {
