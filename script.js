@@ -264,7 +264,7 @@ function revisarCambiosDeEstado() {
     const estadoAnterior = estadosAnteriores.get(tarea.id);
 
     if (estadoAnterior !== estado.texto) {
-      const esUrgente = estado.texto === 'NARANJA' || estado.texto === 'VENCIDA';
+      const esUrgente = estado.texto === 'AMARILLA' || estado.texto === 'NARANJA' || estado.texto === 'VENCIDA';
       if (esUrgente) {
         notificar(tarea, estado);
       }
