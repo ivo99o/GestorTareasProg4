@@ -94,14 +94,14 @@ function crearTarjetaTarea(tarea) {
   });
 
   tarjeta.innerHTML = `
-    <div class="card-body text-center">
+    <div class="card-body text-center d-flex flex-column">
       <h3 class="tarea-titulo card-title h5 mb-2">${tarea.titulo}</h3>
       <div class="tarea-info text-start">
         <p class="tarea-categoria card-text small mb-1">🏷️ Categoría: <strong>${NOMBRES_CATEGORIA[tarea.categoria] || tarea.categoria}</strong></p>
         <p class="tarea-fecha card-text small mb-1">📅 Fecha objetivo: ${fechaLegible}</p>
         <p class="tarea-estado card-text small mb-0">${estado.icono} Estado: <strong>${estado.texto}</strong></p>
       </div>
-      <div class="tarea-acciones d-flex justify-content-center gap-2 mt-3">
+      <div class="tarea-acciones d-flex justify-content-center gap-2 mt-auto">
         <button type="button" class="btn-eliminar btn btn-sm">Eliminar</button>
         <button type="button" class="btn-editar btn btn-sm">Editar</button>
       </div>
