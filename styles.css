@@ -498,7 +498,8 @@ body {
     flex-direction: column;
   }
 
-  .filtros .filtro {
+  .filtros .filtro,
+  .filtros .filtro-pendiente {
     width: 100%;
   }
 }
