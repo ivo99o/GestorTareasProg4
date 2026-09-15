@@ -500,6 +500,10 @@ body {
   overflow: hidden;
 }
 
+.tarea-acciones {
+  padding-top: 0.75rem;
+}
+
 .tarea--vencida   { background-color: var(--color-vencida); }
 .tarea--naranja   { background-color: var(--color-naranja); }
 .tarea--amarilla  { background-color: var(--color-amarilla); color: var(--color-texto); }
