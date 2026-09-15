@@ -277,4 +277,4 @@ tareas = cargarTareas();
 pedirPermisoNotificaciones();
 renderizarTareas();
 
-setInterval(renderizarTareas, 30000);
+setInterval(renderizarTareas, 10000);
