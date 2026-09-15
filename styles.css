@@ -1,10 +1,16 @@
 /* ======================================================
+   TP2 - CSS ORIGINAL (se deja comentado como referencia,
+   la consigna del TP3 pide no borrarlo). El layout y los
+   componentes de mas abajo ahora los maneja Bootstrap 5.
+====================================================== */
+/*
+/* ======================================================
    VARIABLES CSS (:root)
    Centralizamos colores, tipografía, espaciados, bordes
    y sombras para reutilizarlos en todo el sitio.
-====================================================== */
+====================================================== *\/
 :root {
-  /* Colores generales */
+  /* Colores generales *\/
   --color-fondo: #f3f4f6;
   --color-blanco: #ffffff;
   --color-sidebar: #374151;
@@ -14,26 +20,26 @@
   --color-boton: #2563eb;
   --color-activo: #1f2937;
 
-  /* Colores de estado (según proximidad de la fecha) */
+  /* Colores de estado (según proximidad de la fecha) *\/
   --color-vencida: #dc2626;
   --color-naranja: #ea580c;
   --color-amarilla: #eab308;
   --color-pendiente: #9ca3af;
 
-  /* Tipografía */
+  /* Tipografía *\/
   --fuente-principal: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --letra-chica: 0.875rem;
   --letra-normal: 1rem;
   --titulo-tarea: 1.25rem;
   --titulo-principal: 1.75rem;
 
-  /* Espaciados */
+  /* Espaciados *\/
   --espacio-chico: 0.25rem;
   --espacio-medio: 0.75rem;
   --espacio-grande: 1.5rem;
   --espacio-formulario: 2rem;
 
-  /* Bordes y sombras */
+  /* Bordes y sombras *\/
   --borde-inputs: 4px;
   --borde-tarjetas: 8px;
   --sombra-tarjetas: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -348,3 +354,195 @@ body {
     display: none;
   }
 }
+*/
+
+/* ======================================================
+   TP3 - CSS NUEVO (Refactor con Bootstrap)
+   Bootstrap se encarga de: botones, inputs/selects, y las
+   "cards" de las tareas (clases card / card-body / card-title).
+   Las reglas de aca abajo son SOLO lo que Bootstrap no trae:
+   - el ancho responsive 25%/75% del layout
+   - el panel de "Agregar Tarea" como overlay en celular
+     (mismo truco de checkbox + label del TP2, sin JS de Bootstrap)
+   - el grid de tareas que se acomoda solo (auto-fill)
+   - nuestros colores exactos (sidebar y estados de las tareas)
+====================================================== */
+
+:root {
+  --color-fondo: #f3f4f6;
+  --color-texto: #1f2937;
+  --color-texto-claro: #e5e7eb;
+  --color-sidebar: #374151;
+  --color-boton: #2563eb;
+  --color-vencida: #dc2626;
+  --color-naranja: #ea580c;
+  --color-amarilla: #eab308;
+  --color-pendiente: #9ca3af;
+  --sombra-tarjetas: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* ---- Layout: sidebar 25% / contenido 75% en escritorio.
+   Bootstrap no trae una utilidad responsive de "25%/75% que se
+   apilan en celular", asi que agregamos esta regla chica. ---- */
+@media (min-width: 992px) {
+  .sidebar   { flex: 0 0 25%; max-width: 25%; }
+  .contenido { flex: 0 0 75%; max-width: 75%; }
+}
+
+.sidebar {
+  background-color: var(--color-sidebar);
+  color: var(--color-texto-claro);
+}
+
+.sidebar-titulo {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.sidebar-titulo h2 {
+  display: inline-block;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--color-texto-claro);
+}
+
+.form-tarea {
+  width: 100%;
+  max-width: 280px;
+}
+
+.form-label {
+  font-size: 0.875rem;
+}
+
+.toggle-form-checkbox {
+  display: none;
+}
+
+.fab-agregar {
+  display: none;
+}
+
+.btn-cerrar-form {
+  display: none;
+}
+
+/* ---- Celular: el formulario se muestra como panel superpuesto,
+   con el mismo truco de checkbox + label del TP2 (sin usar el
+   JS de Bootstrap, que no necesitamos para esto). ---- */
+@media (max-width: 991.98px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 50;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .toggle-form-checkbox:checked ~ .sidebar {
+    transform: translateY(0);
+  }
+
+  .btn-cerrar-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    color: var(--color-texto-claro);
+    cursor: pointer;
+  }
+
+  .fab-agregar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--color-boton);
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    box-shadow: var(--sombra-tarjetas);
+    cursor: pointer;
+    z-index: 60;
+  }
+
+  .toggle-form-checkbox:checked ~ .fab-agregar {
+    display: none;
+  }
+
+  /* Los filtros se apilan y ocupan todo el ancho */
+  .filtros {
+    flex-direction: column;
+  }
+
+  .filtros .filtro {
+    width: 100%;
+  }
+}
+
+/* ---- Grid de tareas: se acomodan solas segun el espacio
+   disponible (Bootstrap no tiene un equivalente a "auto-fill"). ---- */
+.lista-tareas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+/* ---- Colores propios de cada tarjeta segun estado ---- */
+.tarea.card {
+  border: none;
+  color: #fff;
+}
+
+.tarea--vencida   { background-color: var(--color-vencida); }
+.tarea--naranja   { background-color: var(--color-naranja); }
+.tarea--amarilla  { background-color: var(--color-amarilla); color: var(--color-texto); }
+.tarea--pendiente { background-color: var(--color-pendiente); color: var(--color-texto); }
+
+/* ---- Colores propios de los botones (para respetar la
+   paleta original del TP2) ---- */
+.btn-crear {
+  background-color: var(--color-boton);
+  border-color: var(--color-boton);
+  color: #fff;
+}
+.btn-crear:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #fff;
+}
+
+.btn-eliminar {
+  background-color: #b91c1c;
+  color: #fff;
+}
+.btn-eliminar:hover { background-color: #991b1b; color: #fff; }
+
+.btn-editar {
+  background-color: #facc15;
+  color: #1f2937;
+}
+.btn-editar:hover { background-color: #eab308; color: #1f2937; }
