@@ -474,7 +474,8 @@ body {
     flex-direction: column;
   }
 
-  .filtros .filtro {
+  .filtros .filtro,
+  .filtros .filtro-pendiente {
     width: 100%;
   }
 }
@@ -488,6 +489,19 @@ body {
 .tarea.card {
   border: none;
   color: #fff;
+}
+
+.tarea-titulo {
+  line-height: 1.3;
+  min-height: calc(1.25rem * 1.3 * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tarea-acciones {
+  padding-top: 0.75rem;
 }
 
 .tarea--vencida   { background-color: var(--color-vencida); }
